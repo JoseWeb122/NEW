@@ -1,0 +1,305 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f5f3ed;
+  --color-cream: #fbfaf6;
+  --color-ink: #131c2e;
+  --color-sub: #5b6478;
+  --color-line: #e5e1d6;
+  --color-royal: #2b50c8;
+  --color-royal-deep: #1e3a9e;
+  --color-royal-soft: #e9eefc;
+  --color-amber: #e8962e;
+  --color-amber-deep: #c97a12;
+  --color-amber-soft: #fbf0db;
+  --color-leaf: #1e7a55;
+  --color-leaf-soft: #e1f2ea;
+  --color-clay: #c24a3d;
+  --color-clay-soft: #f9e8e5;
+  --color-navy: #0e1b33;
+  --color-navy-2: #16294d;
+  --color-navy-3: #1f3a6b;
+
+  --font-display: var(--font-sora), "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgb(19 28 46 / 0.05), 0 10px 30px -14px rgb(19 28 46 / 0.14);
+  --shadow-lift: 0 2px 4px rgb(19 28 46 / 0.06), 0 18px 44px -16px rgb(19 28 46 / 0.22);
+}
+
+@theme inline {
+  --font-sora: var(--font-sora-font), "Sora", sans-serif;
+  --font-manrope: var(--font-manrope-font), "Manrope", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #2b50c8;
+  color: #fff;
+}
+
+/* thin scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c9c4b6 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #c9c4b6;
+  border-radius: 8px;
+}
+
+/* ---------- reusable primitives ---------- */
+
+.wrap {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1180px;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px) {
+  .wrap {
+    padding-inline: 2rem;
+  }
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+}
+
+.input {
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input::placeholder {
+  color: #9aa2b4;
+}
+.input:focus {
+  border-color: var(--color-royal);
+  box-shadow: 0 0 0 3px rgb(43 80 200 / 0.14);
+}
+select.input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235b6478' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.25rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-sub);
+  margin-bottom: 0.4rem;
+}
+
+/* dotted academic grid */
+.bg-dots {
+  background-image: radial-gradient(rgb(19 28 46 / 0.1) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.bg-dots-dark {
+  background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ruled paper accent */
+.ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 31px,
+    rgb(43 80 200 / 0.08) 31px,
+    rgb(43 80 200 / 0.08) 32px
+  );
+}
+
+/* ---------- motion ---------- */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+@keyframes floaty2 {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+@keyframes pulseDot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+}
+@keyframes maskUp {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes barGrow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes recPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.anim-fade-up {
+  animation: fadeUp 0.7s cubic-bezier(0.22, 0.65, 0.3, 1) both;
+}
+.anim-float {
+  animation: floaty 6s ease-in-out infinite;
+}
+.anim-float-2 {
+  animation: floaty2 7s ease-in-out infinite;
+}
+.anim-pulse-dot {
+  animation: pulseDot 1.6s ease-in-out infinite;
+}
+.anim-rec {
+  animation: recPulse 1.4s ease-in-out infinite;
+}
+.anim-bar {
+  transform-origin: bottom;
+  animation: barGrow 0.9s cubic-bezier(0.22, 0.65, 0.3, 1) both;
+}
+
+/* line-mask reveal for hero headline */
+.mask-line {
+  display: block;
+  overflow: hidden;
+}
+.mask-line > span {
+  display: block;
+  transform: translateY(110%);
+  animation: maskUp 0.9s cubic-bezier(0.22, 0.65, 0.3, 1) forwards;
+  animation-delay: var(--d, 0s);
+}
+
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.22, 0.65, 0.3, 1),
+    transform 0.7s cubic-bezier(0.22, 0.65, 0.3, 1);
+  transition-delay: var(--rd, 0s);
+}
+.reveal.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* hover lift */
+.lift {
+  transition: transform 0.25s cubic-bezier(0.22, 0.65, 0.3, 1),
+    box-shadow 0.25s, border-color 0.25s;
+}
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
+}
+
+/* underline slide for nav links */
+.navlink {
+  position: relative;
+}
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s cubic-bezier(0.22, 0.65, 0.3, 1);
+}
+.navlink:hover::after,
+.navlink.active::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .mask-line > span {
+    transform: none;
+    animation: none;
+  }
+}
